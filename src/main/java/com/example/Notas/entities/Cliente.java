@@ -63,5 +63,17 @@ public class Cliente {
     public void setEndereco(Endereco endereco){
         this.endereco = endereco;
     }
+
+    @OneToOne
+    @JoinColumn(name = "auth_id")
+    private ClienteAuth clienteAuth;
+
+    public ClienteAuth getClienteAuth() {
+        return clienteAuth;
+    }
+
+    public void setClienteAuth(ClienteAuth clienteAuth) {
+        this.clienteAuth = clienteAuth;
+    }
     
 }

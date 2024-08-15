@@ -5,14 +5,16 @@ public class ClienteDTO {
     private String nome;
     private String email;
     private EnderecoDTO enderecoDTO;
+    private ClienteAuthDTO clienteAuth;
 
     public ClienteDTO() {}
 
-    public ClienteDTO(Long id, String nome, String email, EnderecoDTO enderecoDTO) {
+    public ClienteDTO(Long id, String nome, String email, EnderecoDTO enderecoDTO, ClienteAuthDTO clienteAuth) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.enderecoDTO = enderecoDTO;
+        this.clienteAuth = clienteAuth;
     }
 
     public Long getId() {
@@ -39,13 +41,20 @@ public class ClienteDTO {
         this.email = email;
     }
 
-    public EnderecoDTO getEnderecoDTO(){
+    public EnderecoDTO getEnderecoDTO() {
         return enderecoDTO;
     }
 
-    public void setEnderecoDTO(EnderecoDTO enderecoDTO){
+    public void setEnderecoDTO(EnderecoDTO enderecoDTO) {
         this.enderecoDTO = enderecoDTO;
     }
 
-    
+    public ClienteAuthDTO getClienteAuth() {
+        return clienteAuth;
+    }
+
+    public void setClienteAuth(ClienteAuthDTO clienteAuth) {
+        this.clienteAuth = clienteAuth;
+    }
+
 }

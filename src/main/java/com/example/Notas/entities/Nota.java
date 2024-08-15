@@ -2,6 +2,8 @@ package com.example.Notas.entities;
 
 import java.time.LocalDate;
 
+import com.example.Notas.dto.ClienteDTO;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -64,4 +66,5 @@ public class Nota {
     public void setData(LocalDate data) {
         this.data = data;
     }
+
 }

@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.Notas.dto.ClienteDTO;
 import com.example.Notas.dto.NotaDTO;
-import com.example.Notas.entities.Cliente;
 import com.example.Notas.entities.Nota;
 import com.example.Notas.entities.Produto;
 import com.example.Notas.service.ClienteService;
@@ -38,7 +38,7 @@ public class NotaController {
 
     @PostMapping
     public NotaDTO criarNota(@RequestBody NotaDTO notaDTO){
-        Cliente cliente = clienteService.obterClientePorId(notaDTO.getClienteId()).orElse(null);
+        ClienteDTO cliente = clienteService.obterClientePorId(notaDTO.getClienteId()).orElse(null);
         Produto produto = produtoService.obterProdutosPorId(notaDTO.getProdutoId()).orElse(null);
         Nota nota = NotaMapper.toEntity(notaDTO, cliente, produto);
         Nota notaCriada = notaService.criarNota(nota);
@@ -64,7 +64,7 @@ public class NotaController {
 
     @PutMapping("/{id}")
     public ResponseEntity<NotaDTO> atualizarNota(@PathVariable Long id, @RequestBody NotaDTO notaDTO){
-        Cliente cliente = clienteService.obterClientePorId(notaDTO.getClienteId()).orElse(null);
+        ClienteDTO cliente = clienteService.obterClientePorId(notaDTO.getClienteId()).orElse(null);
         Produto produto = produtoService.obterProdutosPorId(notaDTO.getProdutoId()).orElse(null);
         Nota nota = NotaMapper.toEntity(notaDTO, cliente, produto);
         Nota notaAtualizada = notaService.atualizarNota(id, nota);

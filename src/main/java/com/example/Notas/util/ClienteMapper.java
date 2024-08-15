@@ -1,5 +1,6 @@
 package com.example.Notas.util;
 
+import com.example.Notas.dto.ClienteAuthDTO;
 import com.example.Notas.dto.ClienteDTO;
 import com.example.Notas.dto.EnderecoDTO;
 import com.example.Notas.entities.Cliente;
@@ -13,7 +14,12 @@ public class ClienteMapper {
         enderecoDTO.setCep(cliente.getEndereco().getCep());
         enderecoDTO.setNumero(cliente.getEndereco().getNumero());
         enderecoDTO.setComplemento(cliente.getEndereco().getComplemento());
-        return new ClienteDTO(cliente.getId(), cliente.getNome(), cliente.getEmail(), enderecoDTO);
+
+        ClienteAuthDTO clienteAuth = new ClienteAuthDTO();
+        clienteAuth.setUsername(cliente.getClienteAuth().getUsername());
+        clienteAuth.setPasswordHash(cliente.getClienteAuth().getPasswordHash());
+
+        return new ClienteDTO(cliente.getId(), cliente.getNome(), cliente.getEmail(), enderecoDTO, clienteAuth);
     }
 
     public static Cliente toEntity(ClienteDTO clienteDTO){

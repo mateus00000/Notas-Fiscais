@@ -1,7 +1,7 @@
 package com.example.Notas.util;
 
+import com.example.Notas.dto.ClienteDTO;
 import com.example.Notas.dto.NotaDTO;
-import com.example.Notas.entities.Cliente;
 import com.example.Notas.entities.Nota;
 import com.example.Notas.entities.Produto;
 
