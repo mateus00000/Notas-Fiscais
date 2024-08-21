@@ -10,10 +10,10 @@ public class NotaMapper {
         return new NotaDTO(nota.getId(), nota.getCliente().getId(), nota.getProduto().getId(), nota.getData());
     }
 
-    public static Nota toEntity(NotaDTO notaDTO, Cliente cliente, Produto produto){
+    public static Nota toEntity(NotaDTO notaDTO, ClienteDTO cliente, Produto produto){
         Nota nota = new Nota();
         nota.setId(notaDTO.getId());
-        nota.setCliente(cliente);
+        //nota.setCliente(cliente);
         nota.setProduto(produto);
         nota.setData(notaDTO.getData());
         return nota;

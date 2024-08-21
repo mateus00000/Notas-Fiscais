@@ -39,7 +39,7 @@ public class ClienteService {
 
         Cliente clienteSalvo = clienteRepository.save(cliente);
         clienteAuth.setId(clienteSalvo.getId());
-        clienteAuthRepository.save(clienteAuth);
+        //clienteAuthRepository.save(clienteAuth);
 
         ClienteDTO clienteSalvoDTO = ClienteMapper.toDTO(clienteSalvo);
         return ResponseEntity.ok(clienteSalvoDTO);

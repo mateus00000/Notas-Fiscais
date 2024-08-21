@@ -1,9 +1,12 @@
 package com.example.Notas.util;
 
+import java.security.NoSuchAlgorithmException;
+
 import com.example.Notas.dto.ClienteAuthDTO;
 import com.example.Notas.dto.ClienteDTO;
 import com.example.Notas.dto.EnderecoDTO;
 import com.example.Notas.entities.Cliente;
+import com.example.Notas.entities.ClienteAuth;
 import com.example.Notas.entities.Endereco;
 
 public class ClienteMapper {
@@ -36,6 +39,18 @@ public class ClienteMapper {
             endereco.setComplemento(clienteDTO.getEnderecoDTO().getComplemento());
             cliente.setEndereco(endereco);
         }
+
+        if(clienteDTO.getClienteAuth().getPasswordHash() != null){
+            ClienteAuth clienteAuth = new ClienteAuth();
+            clienteAuth.setUsername(clienteDTO.getEmail());
+            try {
+                clienteAuth.setPasswordHash(clienteDTO.getClienteAuth().getPasswordHash());
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
+            cliente.setClienteAuth(clienteAuth);
+        }
+
         return cliente;
     }
 }
