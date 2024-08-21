@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.Notas.dto.ClienteDTO;
 import com.example.Notas.service.ClienteService;
 
+import jakarta.servlet.http.HttpServletResponse;
+
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
@@ -24,8 +26,8 @@ public class ClienteController {
     private ClienteService clienteService;
 
     @PostMapping
-    public ResponseEntity<ClienteDTO> criarCliente(@RequestBody ClienteDTO clienteDTO){
-        return clienteService.criarCliente(clienteDTO);
+    public ResponseEntity<ClienteDTO> criarCliente(@RequestBody ClienteDTO clienteDTO, HttpServletResponse response){
+        return clienteService.criarCliente(clienteDTO, response);
     }
 
     @GetMapping

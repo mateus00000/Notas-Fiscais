@@ -12,14 +12,18 @@ import com.example.Notas.dto.ClienteDTO;
 import com.example.Notas.entities.Cliente;
 import com.example.Notas.repository.ClienteRepository;
 import com.example.Notas.util.ClienteMapper;
+import com.example.Notas.util.Hashing;
 import com.example.Notas.util.ValidaEmail;
+
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Service
 public class ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
 
-    public ResponseEntity <ClienteDTO> criarCliente(ClienteDTO clienteDTO){
+    public ResponseEntity <ClienteDTO> criarCliente(ClienteDTO clienteDTO, HttpServletResponse response){
        
         if (!ValidaEmail.validarCaracterArroba(clienteDTO.getEmail())){
             return ResponseEntity.status(422).build();
@@ -27,6 +31,20 @@ public class ClienteService {
 
         Cliente cliente = ClienteMapper.toEntity(clienteDTO); 
         ClienteDTO clienteSalvoDTO = ClienteMapper.toDTO(clienteRepository.save(cliente));
+
+        try {
+            String idClient = Hashing.hash(clienteDTO.getId().toString());
+            Cookie sessionCookie = new Cookie("idClient", idClient);
+
+            sessionCookie.setHttpOnly(true);
+            sessionCookie.setSecure(true);
+            sessionCookie.setMaxAge(60 * 60);
+            sessionCookie.setPath("/");
+
+            response.addCookie(sessionCookie);
+        } catch (Exception e) {
+            e.getMessage();
+        }
         return ResponseEntity.ok(clienteSalvoDTO);
     }
 
