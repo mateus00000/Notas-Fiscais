@@ -64,7 +64,7 @@ public class Cliente {
         this.endereco = endereco;
     }
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "auth_id")
     private ClienteAuth clienteAuth;
 

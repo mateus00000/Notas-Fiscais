@@ -33,7 +33,7 @@ public class ClienteService {
         ClienteDTO clienteSalvoDTO = ClienteMapper.toDTO(clienteRepository.save(cliente));
 
         try {
-            String idClient = Hashing.hash(clienteDTO.getId().toString());
+            String idClient = Hashing.hash(cliente.getId().toString());
             Cookie sessionCookie = new Cookie("idClient", idClient);
 
             sessionCookie.setHttpOnly(true);
