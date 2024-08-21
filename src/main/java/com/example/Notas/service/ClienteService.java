@@ -1,6 +1,5 @@
 package com.example.Notas.service;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.Notas.dto.ClienteDTO;
 import com.example.Notas.entities.Cliente;
-import com.example.Notas.entities.ClienteAuth;
 import com.example.Notas.repository.ClienteRepository;
 import com.example.Notas.util.ClienteMapper;
 import com.example.Notas.util.ValidaEmail;
@@ -22,26 +20,13 @@ public class ClienteService {
     private ClienteRepository clienteRepository;
 
     public ResponseEntity <ClienteDTO> criarCliente(ClienteDTO clienteDTO){
-        if (!ValidaEmail.validarCaracterArroba(ClienteDTO.getEmail())){
+       
+        if (!ValidaEmail.validarCaracterArroba(clienteDTO.getEmail())){
             return ResponseEntity.status(422).build();
         }
 
-        Cliente cliente = ClienteMapper.toEntity(clienteDTO);
-
-        ClienteAuth clienteAuth = new ClienteAuth();
-        clienteAuth.setUsername(clienteDTO.getEmail());
-        try {
-            clienteAuth.setPasswordHash(clienteDTO.getClienteAuth().getPasswordHash());
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return ResponseEntity.status(500).build();
-        }
-
-        Cliente clienteSalvo = clienteRepository.save(cliente);
-        clienteAuth.setId(clienteSalvo.getId());
-        //clienteAuthRepository.save(clienteAuth);
-
-        ClienteDTO clienteSalvoDTO = ClienteMapper.toDTO(clienteSalvo);
+        Cliente cliente = ClienteMapper.toEntity(clienteDTO); 
+        ClienteDTO clienteSalvoDTO = ClienteMapper.toDTO(clienteRepository.save(cliente));
         return ResponseEntity.ok(clienteSalvoDTO);
     }
 
