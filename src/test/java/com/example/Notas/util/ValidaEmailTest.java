@@ -81,5 +81,30 @@ public class ValidaEmailTest {
     void testEmailInvalidoDominio() {
         assertTrue(ValidaEmail.isValid("mateus@.com"));
     }
-    
+
+    @Test
+    void testEmailInvalidoTLD() {
+        //Testando um email sem TLD (top level domain) - (ex: .com, .org)
+        assertFalse(ValidaEmail.isValid("mateus@senac"));
+    }
+
+    @Test
+    void testEmailInvalidoCaracterEspecial() {
+        assertFalse(ValidaEmail.isValid("mateus@senac!aluno.com"));
+    }
+
+    @Test
+    void testEmailValidoSubDominio() {
+        assertTrue(ValidaEmail.isValid("mateus@aluno.sc.senac.br"));
+    }
+
+    @Test
+    void testEmailValidoNumeroDominio() {
+        assertTrue(ValidaEmail.isValid("mateus@123.com"));
+    }
+
+    @Test
+    void testEmailInvalidoPontos() {
+        assertFalse(ValidaEmail.isValid("mateus..senac@aluno.com"));
+    }
 }
