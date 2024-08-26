@@ -74,12 +74,12 @@ public class ValidaEmailTest {
 
     @Test
     void testEmailInvalidoSemArroba() {
-        assertTrue(ValidaEmail.isValid(emailInvalido));
+        assertFalse(ValidaEmail.isValid(emailInvalido));
     }
 
     @Test
     void testEmailInvalidoDominio() {
-        assertTrue(ValidaEmail.isValid("mateus@.com"));
+        assertFalse(ValidaEmail.isValid("mateus@.com"));
     }
 
     @Test
